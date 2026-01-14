@@ -2,24 +2,45 @@
 
 ## Idee
 
-Erstellung von audiovisuellen Effekten durch Edge-Detection, Feedback-Loops und pixelierte Effekte, die auf mehrere Würfel projiziert werden und durch Parameter der Noise-Funktionen von der Musik beeinflusst werden.
+Erstellung von audiovisuellen Effekten durch Projection Mapping auf mehrere Würfel. Edge-Detection, Feedback-Loops und pixelierte Effekte werden auf die Würfelflächen projiziert und durch Audio-Reaktivität von der Musik beeinflusst.
 
 ## Tutorial
 
 **[Realtime White Visuals - TouchDesigner Tutorial (Beginner Friendly!)](https://www.youtube.com/watch?v=8ABSC0gkJrU)**
-- von Daniel Steenhoff  
-- Zeigt: Edge TOP, Feedback-Loop und Limit TOP für pixelierte Effekte
-- [TouchDesigner Download](https://derivative.ca/download)
+
+**Links & Downloads:**
+- **von:** Daniel Steenhoff
+- **Zeigt:** Edge TOP, Feedback-Loop und Limit TOP für pixelierte Effekte
+- **Grundkonzept:** Audio-reaktive Visuals mit Noise-Funktionen
 
 ## Umsetzung
 
-Im Tutorial werden einfache Netzwerke mit Edge TOP, Feedback-Loops und dem Limit TOP verwendet, um pixelierte Effekte zu erzeugen. Eine Fläche wird mit mehreren Quadraten gefüllt, deren Parameter durch Noise-Funktionen beeinflusst werden. Dies erzeugt ein musikabhängiges, sich veränderndes Muster.
+### Audio Setup
+- Custom **AudioAnalysis Component** für Frequenzband-Separation
+- Audio-Input wird in separate Signale aufgeteilt: Low, Mid, High, Snare, Kick, etc.
+- Separate Kanäle ermöglichen präzise Parameter-Steuerung nach Frequenzbereichen
+- Jedes Signal wird als Parameter an die Feedback-Loops weitergeleitet
+
+### Effekt-Netzwerk
+- Edge TOP für Kantenerkennung
+- Feedback-Loop für kontinuierliche visuelle Rückkopplung
+- Audio-Signale steuern Feedback-Parameter (z.B. Decay, Opacity basierend auf Frequency-Bands)
+- Limit TOP für pixelierte Effekte
+- Noise-Funktionen für zusätzliche Parameter-Animation
+
+### Projektion auf Würfel
+- Projection Mapping auf **6 verschiedene Würfel** mit unterschiedlichen Größen
+- Separate Texture-Transformationen für jede Würfelfläche
+- Audioreaktivität wird durch die aufgesplitteten Frequency-Bänder erzeugt
 
 ## Abänderungen
 
-- Anpassung gewisser Parameter zur Optimierung des visuellen Outputs
-- Projektion der Fläche auf **6 verschiedene, unterschiedlich große Würfel** statt auf einer ebenen Fläche
+- Adaption des Tutorials von ebener Fläche auf Würfel-Geometrie
+- Integration von audio-reaktiven Parametern für dynamische Effekte
+- Optimierung der Verstärkungsfaktoren für visuelle Ausgabe
 
 ## Erfolge
 
-Das Ergebnis sieht visuell sehr ansprechend aus. Für zukünftige Iterationen sollte **Instancing** verwendet werden statt die Nodes zu kopieren, um die Performance zu verbessern und die Wartbarkeit zu erhöhen.
+- Visuell ansprechend mit organischen Mustern und Audio-Reaktivität
+- Erfolgreiche Projektion auf mehrere 3D-Geometrien
+- Für zukünftige Iterationen: **Instancing** statt Node-Duplikation für bessere Performance
