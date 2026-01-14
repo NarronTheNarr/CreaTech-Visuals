@@ -8,9 +8,9 @@
 
 Wir möchten mittels **TouchDesigner** audiovisuelle Livevisuals kreieren. Dafür haben wir mehrere Tutorials geschaut und diese nachgebaut sowie ergänzt. Insgesamt haben wir **8 verschiedene Files** erstellt. Für unsere Abgabe beschränken wir uns auf **4 fertige Files**:
 
-- [6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT](./TouchDesigner/visuals/6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT.md)
-- [Würfel_Gitter_AT](./TouchDesigner/visuals/Würfel_Gitter_AT.md)
-- [Platzhalter File 3]
+- [6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT](Beschreibung/6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT.md)
+- [Würfel_Gitter_AT](Beschreibung/Würfel_Gitter_AT.md)
+- [Prism_Insctances_JS](TouchDesigner/visuals/Prism_Instances_JS.toe)
 - [Platzhalter File 4]
 
 ## Technologie & Setup
