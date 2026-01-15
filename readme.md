@@ -67,7 +67,7 @@ AUDIO EINGABE                          VERARBEITUNG              AUSGABE
 ```
 
 **Grafische Veranschaulichung der Systemarchitektur:**
-![System Architecture Diagram](/Demos/pictures/creaTech_system_architecture.jpgsystem_architecture.png)
+![System Architecture Diagram](/Demos/pictures/creaTech_system_architecture.jpg)
 
 **Komponenten-Details:**
 
