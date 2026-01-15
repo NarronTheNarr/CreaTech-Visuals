@@ -15,7 +15,8 @@ Wir haben audiovisuelle Livevisuals mittels **TouchDesigner** kreiert. Dabei hab
 
 1. **[6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT](./Beschreibung/6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT.md)** – Projection Mapping mit Audio-Reaktivität
 2. **[Würfel_Gitter_AT](./Beschreibung/Würfel_Gitter_AT.md)** – Audio-reaktive Gitter-Würfel Effekte
-3. **[Prism_Instances_JS](TouchDesigner/visuals/Prism_Instances_JS.toe)** – Prismatische Würfel-Instancing mit Audio-Reaktivität 
+3. **[Prism_Instances_JS](TouchDesigner/visuals/Prism_Instances_JS.toe)** – Prismatische Würfel-Instancing mit Audio-Reaktivität
+4. **[Visual 4 - Coming Soon]** – Zusätzliches Audio-reaktives Projekt (in Bearbeitung) 
 
 ---
 
@@ -127,6 +128,10 @@ AUDIO EINGABE                          VERARBEITUNG              AUSGABE
 
 **Konzept:** Audio-reaktive Grid-Effekte auf Würfel-Struktur mit automatisierten Audio-Reaktiv-Komponenten
 
+**⚠️ Voraussetzung:** Custom Audio-Reactive Komponenten müssen vom [Acrylicode Patreon](https://www.patreon.com/acrylicode) heruntergeladen werden:
+- Setup Audio Reactive Song Component
+- Audio Reactive Rotation Component
+
 **Umsetzung:**
 - **Audio Setup:** Audio-Track in TouchDesigner importieren mit automatischer Timeline-Anpassung via Setup Audio Reactive Song Component
 - **Custom Komponenten:**
@@ -146,6 +151,8 @@ AUDIO EINGABE                          VERARBEITUNG              AUSGABE
 ### Visual 3: Prism_Instances_JS
 
 **Konzept:** Prismatische Würfel-Instancing mit Audio-Reaktivität und dynamischen 3D-Überlagerungen
+
+**Voraussetzung:** Custom Instancing Components sind im Projekt enthalten oder können via nsohfi Patreon erweitert werden.
 
 **Umsetzung:**
 - **Audio Setup:** Audio-Datei importieren, Audio Device Out und Mono-Konvertierung via Math CHOP
@@ -171,7 +178,83 @@ AUDIO EINGABE                          VERARBEITUNG              AUSGABE
 
 ---
 
-## 🔧 Aufgabenverteilung
+## � Installation & Setup
+
+### Dateien öffnen
+
+1. **TouchDesigner installieren:**
+   - [TouchDesigner Non-Commercial Download](https://derivative.ca/download) (kostenlos)
+   - Version 2023 oder höher empfohlen
+
+2. **.toe Dateien öffnen:**
+   ```
+   TouchDesigner/visuals/*.toe
+   ```
+   - Einfach mit TouchDesigner öffnen oder Drag & Drop
+
+### Custom Components installieren
+
+Für **Visual 2 (Würfel_Gitter_AT)** sind Custom Audio-Reactive Komponenten erforderlich:
+
+- **Acrylicode Patreon:** https://www.patreon.com/acrylicode
+  - Setup Audio Reactive Song Component
+  - Audio Reactive Rotation Component
+  
+Nach dem Download in das Projekt-Verzeichnis kopieren oder im Netzwerk-Dialog laden.
+
+### Audio-Setup vor Live-Performance
+
+1. Zoom H5/H6 Aufnahmegerät mit USB verbinden
+2. In Windows Sound Settings als Default Input setzen
+3. In TouchDesigner Audio-Input konfigurieren (Audio Device CHOP)
+4. **Test:** Musik abspielen und Visuals sollten reagieren
+
+---
+---
+
+## 📝 Entwicklungsprozess & Reflexion
+
+### Planungs- und Entwicklung
+
+Das Projekt startete mit einer individuellen Recherche-Phase: Jedes Projektmitglied suchte unabhängig vier Tutorials nach persönlichen Ansprüchen aus. **Entscheidend war die pragmatische Tutorial-Auswahl** – es wurde bewusst auf Anfänger-freundliche Tutorials geachtet, um nicht in unnötig komplexe Konzepte zu geraten und Paywalls zu vermeiden.
+
+Danach erfolgte die **individuelle Umsetzung** der Tutorials in eigene TouchDesigner-Projekte mit Modifikationen. Die Arbeiten wurden in regelmäßigen Sessions besprochen und koordiniert.
+
+### Zentrale Herausforderungen & Lösungen
+
+**Framerate-Synchronisation:**
+- **Problem:** Beim Zusammenführen der Projekte entstanden Synchronisationsprobleme durch unterschiedliche Framerate-Einstellungen
+- **Ursache:** CPU vs. GPU Bottlenecks, unterschiedliche Resolutionen, Shader-Komplexität
+- **Lösung:** Resolution-Management, Cooking-Optimierung, Shader-Features minimieren
+
+**Streaming-Lag:**
+- **Problem:** Ca. 1 Sekunde Lag beim Streaming beeinträchtigt Live-Reaktivität
+- **Impact:** Kritisch für Audio-Reaktivität auf der Bühne
+- **Mitigation:** Optimierte Streaming-Settings und Hardware-Planung
+
+### Verwendete Tools & Ressourcen
+
+- **YouTube Tutorials** – Zentrale Lernressource (Qualität sehr unterschiedlich)
+- **TouchDesigner 2023** – Hauptentwicklungssoftware
+- **AI-Tools** – Unterstützung bei Dokumentation und Rechtschreibeprüfung
+
+### Lerneffekte (Zusammenfassung)
+
+**Aaron:**
+- Grundsätzliches Verständnis für TouchDesigner-Möglichkeiten
+- Wie Audio-Signale visuelle Effekte steuern
+- Wichtigkeit sorgfältiger Tutorial-Auswahl
+- Praktisches Wissen über Frequency-Band-Separation und Parameter-Steuerung
+
+**Jan:**
+- [Wird ergänzt]
+
+---
+
+**→ [Ausführlicher Reflection Report mit allen Details](./REFLECTION.md)**
+
+---
+## �🔧 Aufgabenverteilung
 
 | Aufgabe | Verantwortlich |
 |---------|---|
