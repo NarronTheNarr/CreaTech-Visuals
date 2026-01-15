@@ -6,56 +6,49 @@ Erstellung eines audio-reaktiven Visuellen Effekts basierend auf einem Gitter-W�
 
 ## Tutorial
 
-**Audio Reactive Visuals in TouchDesigner - von Acrylicode**
+**[Create audio reactive visuals on TouchDesigner](https://www.youtube.com/watch?v=dPXkWLHYCQk)**
 
 **Links & Downloads:**
-- **YouTube Video:** Grid Lines Texture | TouchDesigner Tutorial
-- **Absolute Beginner Video:** https://www.youtube.com/watch?v=qbupH...
-
-**Grundkonzept:**
-- Verwendung von drei custom TouchDesigner Komponenten für audio-reaktive Effekte
-- Setup Audio Reactive Song - automatisiert die Timeline-Anpassung an die Audiolänge
-- Audio Reactive Rotation - kontinuierlich wachsende Werte (geeignet für Rotations- und Translations-Parameter)
-- Audio Reactive Value - Werte mit definierten Grenzen (geeignet für Parameter mit bestimmtem Wertebereich)
+- **von:** Acrylicode
+- **Zeigt:** Custom Audio-Reactive Komponenten, Setup-Automatisierung, Timeline-Anpassung, Parameterkontrolle nach Audio-Frequenzbändern
+- **Grundkonzept:** Audio-reaktive Visuals mit custom TouchDesigner Komponenten für präzise und flexible Parametersteuerung
 
 ## Umsetzung
 
 ### Audio Setup
 1. Audio-Track in TouchDesigner importieren (z.B. von Epidemic Sound)
-2. Audio Device Out anschließen für Ausgabe
-3. Custom Component "Setup Audio Reactive Song" verwenden:
-   - Audio CHOP in die Song-Parameter einfügen
-   - Setup-Button drücken
-   - Timeline wird automatisch auf die Audiolänge angepasst
-   - Play Mode wird automatisch auf "Set to Timeline" gestellt
+2. **Audio Device Out CHOP** anschließen für Audioausgabe
+3. **Null CHOP** nach dem Audio anschließen (optional, für einfacheren Track-Wechsel später)
+
+### Setup Audio Reactive Song Komponente
+- Custom Component "Setup Audio Reactive Song" automatisiert die Timeline-Anpassung
+- Prozess:
+  - Audio CHOP in die **Song-Parameter** einfügen
+  - **Setup-Button** drücken
+  - Timeline-Länge wird automatisch auf Audiolänge angepasst
+  - Play Mode wird automatisch auf "Set to Timeline" gestellt
 
 ### Audio Reactive Rotation Komponente
-- Gibt konstant wachsende Werte aus
-- Ideal für Parameter, die kontinuierlich wachsen können (Rotation, Translation)
-- **Nicht geeignet** für Skalierung (würde zu schnell aus dem Bild laufen)
-- Multiplizieren mit Faktoren (z.B. 0.01, 0.03) zur Geschwindigkeitsanpassung
-- Kann auf jeden Parameter angewendet werden, der normalerweise mit `abs(time.seconds)` animiert wird
-
-### Audio Reactive Value Komponente
-- Hat zwei Ausgaben:
-  - **Oben:** Clamped Values (begrenzte Werte)
-  - **Unten:** Raw Data (Rohdaten vom Track)
-- Parameter:
-  - **Gain:** Multiplikator für Ausgabewerte
-  - **To Range:** Definiert obere und untere Grenze für die Ausgabewerte
-- Beispiel: Noise TOP Period von 0.5 bis 1.8 animieren
-- **Wichtig:** Immer die obere Null (clamped values) verwenden
+- Gibt konstant wachsende Werte aus (ideal für kontinuierliche Animationen)
+- **Geeignet für:** Rotations-, Translations- und Positions-Parameter
+- **Nicht geeignet für:** Skalierung (würde zu schnell aus dem Bild laufen)
+- **Anwendung:**
+  - Null CHOP nach der Komponente anschließen
+  - Auf Parameter wie Translate Z ziehen
+  - Mit Multiplikatoren anpassen (z.B. ×0.01, ×0.03) zur Geschwindigkeitsregelung
+- **Verwendbar** auf jedem Parameter, der normalerweise mit `abs(time.seconds)` animiert wird
+- In diesem Projekt: Würfel-Parameter mit Audio-Reaktivität verbunden
 
 ## Abänderungen
 
-- Würfel statt Sphere im Sinne unseres Projekts
-- Anpassung der Verstärkung (Gain) für optimale Audio-Reaktivität
-- Definition der Wertebereich (To Range) für spezifische Parameter
-- Mehrfache Parameter können mit unterschiedlichen Multiplikatoren gesteuert werden
+- **Sphere durch Würfel ersetzt** als Geometrie-Element
+- **Nur Audio Reactive Rotation implementiert** (bis Minute 5:30 des Tutorials)
+- Würfel-Parameter statt Sphere-Parameter für Translate Z und andere Transformationen
+- Fokus auf kontinuierliche, zeitbasierte Animationen durch Audio
 
 ## Erfolge
 
-- Einfache Umwandlung von statischen Visuals zu audio-reaktiven Effekten
-- Automatisiertes Audio-Setup reduziert manuelle Konfiguration
-- Flexible Komponenten erlauben kreative Anwendung auf verschiedenste Parameter
-- Custom Komponenten reduzieren Komplexität und Wiederholungsarbeit
+- Audio-reaktive Geometrie mit automatisiertem Timeline-Setup
+- Einfache Geschwindigkeit und Bewegung durch Audio-Pegel steuerbar
+- Custom Komponenten reduzieren Konfigurationsaufwand
+- Flexible Multiplikatoren ermöglichen schnelle Anpassung an verschiedene Audiotracks

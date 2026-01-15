@@ -9,30 +9,93 @@
 
 ## 📋 Projektabsicht
 
-- [6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT](Beschreibung/6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT.md)
-- [Würfel_Gitter_AT](Beschreibung/Würfel_Gitter_AT.md)
-- [Prism_Insctances_JS](TouchDesigner/visuals/Prism_Instances_JS.toe)
-- [Platzhalter File 4]
+Wir haben audiovisuelle Livevisuals mittels **TouchDesigner** kreiert. Dabei haben wir verschiedene Tutorials analysiert, nachgebaut und mit eigenen Modifikationen erweitert. Das Projekt umfasst insgesamt **8 verschiedene TouchDesigner-Files**, wovon die **4 besten** für die finale Abgabe und den Auftritt ausgewählt wurden.
 
 ### Finale Visuals
 
 1. **[6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT](./Beschreibung/6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT.md)** – Projection Mapping mit Audio-Reaktivität
 2. **[Würfel_Gitter_AT](./Beschreibung/Würfel_Gitter_AT.md)** – Audio-reaktive Gitter-Würfel Effekte
+3. **[Prism_Instances_JS](TouchDesigner/visuals/Prism_Instances_JS.toe)** – Prismatische Würfel-Instancing mit Audio-Reaktivität 
 
 ---
 
 ## 🛠️ Technologie & Setup
 
-- **Software:** TouchDesigner 2025 (Non-Commercial)
+### System Architecture
+
+```
+┌──────────────────────────────────────────────────────────────────────────┐
+│                        LIVE SETUP WORKFLOW                                │
+└──────────────────────────────────────────────────────────────────────────┘
+
+AUDIO EINGABE                          VERARBEITUNG              AUSGABE
+   
+┌──────────┐      ┌───────────┐    ┌──────────────┐    ┌──────────────┐
+│  CDJ     │──────│  Mixer    │────│ Mischpult    │────│   Zoom       │
+│          │ DMX  │  & Audio  │ HF │ (AUX Input)  │    │  Aufnahmegerät
+└──────────┘      └───────────┘    └──────────────┘    │   (USB Out)  │
+                                      ▲                 └──────────────┘
+                                      │                        │
+                                  Chinch-Kabel              USB-Audio
+                                   (RCA)                       │
+                                                              ▼
+                                                    ┌──────────────────┐
+                                                    │  Laptop          │
+                                                    │ TouchDesigner    │
+                                                    │  2023            │
+                                                    │                  │
+                                                    │ • Audio Analysis │
+                                                    │ • Real-time      │
+                                                    │   Rendering      │
+                                                    └──────────────────┘
+                                                            │
+                                                          HDMI
+                                                            │
+                                                            ▼
+                                                    ┌──────────────────┐
+                                                    │  HDMI Splitter   │
+                                                    └──────────────────┘
+                                                      │              │
+                                                    HDMI          HDMI
+                                                      │              │
+                                    ┌─────────────────┘              │
+                                    ▼                                ▼
+                          ┌──────────────────┐            ┌──────────────────┐
+                          │    Beamer 1      │            │    Beamer 2      │
+                          │  (Projektion)    │            │  (Projektion)    │
+                          └──────────────────┘            └──────────────────┘
+```
+
+**Grafische Veranschaulichung der Systemarchitektur:**
+![System Architecture Diagram](system_architecture.png)
+
+**Komponenten-Details:**
+
+| Komponente | Funktion | Verbindung |
+|---|---|---|
+| **CDJ** | Audio-Quelle | DMX → Mixer |
+| **Mixer** | Audio-Signalverarbeitung | Analoges Audio → Mischpult |
+| **Mischpult (AUX)** | Audio-Pegelregelung | Chinch/RCA → Zoom |
+| **Zoom Aufnahmegerät** | Audio-Digitalisierung | USB → Laptop |
+| **Laptop** | Visuals Processing & Rendering | HDMI → Splitter |
+| **HDMI Splitter** | Video-Distribution | HDMI → 2× Beamer |
+| **Beamer 1 & 2** | Projektion auf Flächen | Video-Input (HDMI) |
+
+
+---
+
+- **Software:** TouchDesigner 2023 (Non-Commercial)
 - **Betriebssystem:** Windows
-- **Audio-Input:** Unterstützung für externe Audio-Quellen
+- **Audio-Input:** CDJ → Mixer → Mischpult (AUX) → Zoom Aufnahmegerät (USB)
 - **Zusätzliche Komponenten:** Custom AudioAnalysis Components für Frequenzband-Separation
+
+
 
 ### Systemanforderungen
 
 - **GPU:** Dedizierte Grafikkarte erforderlich (für optimale Performance)
 - **CPU:** Multi-Core Prozessor empfohlen
-- **RAM:** Mindestens 8GB
+- **RAM:** Mindestens 8GB (empfohlen mindesten 16GB)
 - **Monitor:** Full HD oder höher für Live-Performance
 
 ---
@@ -62,22 +125,49 @@
 
 ### Visual 2: Würfel_Gitter_AT
 
-**Konzept:** Audio-reaktive Grid-Effekte auf Würfel-Struktur
+**Konzept:** Audio-reaktive Grid-Effekte auf Würfel-Struktur mit automatisierten Audio-Reaktiv-Komponenten
 
 **Umsetzung:**
-- **Audio Setup:** Standard Audio-Import mit automatischer Timeline-Anpassung
-- **Komponenten:**
-  - Setup Audio Reactive Song (automatisiert Timeline-Anpassung)
-  - Audio Reactive Rotation (kontinuierlich wachsende Werte für Rotationen)
-  - Audio Reactive Value (Werte mit definierten Grenzen)
-- **Effekte:** Gitter-basierte Visualisierung mit Noise-Funktionen
+- **Audio Setup:** Audio-Track in TouchDesigner importieren mit automatischer Timeline-Anpassung via Setup Audio Reactive Song Component
+- **Custom Komponenten:**
+  - Setup Audio Reactive Song (automatisiert Timeline-Länge und Play Mode)
+  - Audio Reactive Rotation (kontinuierlich wachsende Werte für Rotations- und Translations-Parameter)
+- **Effekte:** Gitter-basierte Würfel-Visualisierung mit Noise-Funktionen
+- **Parameter-Animation:** Multiplizierte LFO-Werte für kontinuierliche Bewegung (z.B. ×0.01, ×0.03)
 
-**Basis-Tutorial:** Audio Reactive Visuals in TouchDesigner von Acrylicode
+**Basis-Tutorial:** [Create audio reactive visuals on TouchDesigner](https://www.youtube.com/watch?v=dPXkWLHYCQk) von Acrylicode
 
-**Spezifische Konfiguration:**
-- Audio CHOP in Song-Parameter integriert
-- Automation der Timeline auf Audiolänge
-- Audio Reactive Value mit Gain und Range-Parametern konfiguriert
+**Modifikationen:**
+- Sphere durch Würfel ersetzt als Geometrie-Element
+- Nur Audio Reactive Rotation implementiert (bis Minute 5:30)
+- Fokus auf kontinuierliche, zeitbasierte Animationen durch Audio-Pegel
+- Würfel-Parameter mit Audio-Reaktivität verbunden
+
+### Visual 3: Prism_Instances_JS
+
+**Konzept:** Prismatische Würfel-Instancing mit Audio-Reaktivität und dynamischen 3D-Überlagerungen
+
+**Umsetzung:**
+- **Audio Setup:** Audio-Datei importieren, Audio Device Out und Mono-Konvertierung via Math CHOP
+- **Audio Analysis:** Frequency-Separation in Low, Mid, High Kanäle mit Threshold/Gain/Smoothing
+- **Farb-Trail-Netzwerk:** Color Trail mit Feedback-Loops und kontinuierlicher visueller Rückkopplung
+- **Noise-Geometrie:** Tube SOP mit Twist-Effekten, konvertiert zu Noise TOP für organische Formen
+- **Instancing:** Box SOP mit Geometry Component und Custom Default OP Parameter (Translate XYZ = R, G, B)
+- **Effekte:**
+  - Multi-Kamera-Blending (Orthographisch + Isometrisch mit LFO-Steuerung)
+  - Prismatisches Compositing (mehrfache Over/Transform Paare mit verschiedenen Transformationen)
+  - Light Leaks mit Audio-Steuerung (High-Frequenzen steuern Opacity)
+  - Dynamische Parameter-Switches (Low/Mid/High triggern unterschiedliche Transformationen)
+- **Post-Processing:** Bloom, Luma Blur, RGB Lookup, optionales RGB Delay
+
+**Basis-Tutorial:** [Audio Reactive Prismatic Visuals - TouchDesigner Tutorial](https://www.youtube.com/watch?v=tZt1SQUZl6U) von nsohfi (Noah Shipman)
+
+**Modifikationen:**
+- Instancing statt Node-Duplikation für optimale Performance
+- Erweiterte Audio-Analyse mit Frequenzband-Separation
+- Prismatische Effekte durch mehrfache zufällige Überlagerungen
+- Dual-Kamera-Blending für dynamische Perspektivwechsel
+- Audio-reaktive Light Leaks für erhöhte Dynamik
 
 ---
 
@@ -150,7 +240,7 @@
 
 ### Verwendete Tools
 
-- **TouchDesigner 2025** – Hauptentwicklungssoftware
+- **TouchDesigner 2023** – Hauptentwicklungssoftware
 - **YouTube Tutorials** – Primäre Lernressource
 - **AI-Tools** – Unterstützung bei Dokumentation und Rechtschreibeprüfung
 - **Custom Components** – AudioAnalysis für Frequenzband-Separation
@@ -188,13 +278,3 @@ CreaTech-Visuals/
 ```
 
 ---
-
-## 📞 Kontakt & Lizenz
-
-**Projekt:** FH Graubünden CreaTech  
-**Lizenz:** [Zu definieren]  
-**Kontakt:** aaron.taeschler@fh-graubuenden.ch, jan.schmidt@fh-graubuenden.ch
-
----
-
-*Letzte Aktualisierung: Januar 2026*
