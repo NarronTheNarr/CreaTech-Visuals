@@ -2,9 +2,17 @@
 
 ## Idee
 
-Erstellung eines audio-reaktiven Visuellen Effekts basierend auf einem Gitter-Würfel. Das Projekt nutzt custom TouchDesigner Komponenten, um Audiovisuals mit reaktiven Parametern zu erstellen.
+Erstellung eines audio-reaktiven Visuellen Effekts basierend auf einem Gitter-Würfel. Das Projekt nutzt custom TouchDesigner Komponenten und parametrische Gitter-Strukturen, um Audiovisuals mit reaktiven Parametern zu erstellen.
 
-## Tutorial
+## Tutorial-Reihe
+
+### Basis-Tutorial: Grid Lines Texture
+
+**[Grid Lines Texture | TouchDesigner Tutorial](https://www.youtube.com/watch?v=U1HsqYYmn78)**
+
+**Grundkonzept:** Parametrische Gitter-Strukturen durch Konvertierung zwischen Subs, Tops und Chops. Basis für dynamische Liniendicken-Kontrolle.
+
+### Haupttutorial: Audio Reactive Visuals
 
 **[Create audio reactive visuals on TouchDesigner](https://www.youtube.com/watch?v=dPXkWLHYCQk)**
 
@@ -14,6 +22,29 @@ Erstellung eines audio-reaktiven Visuellen Effekts basierend auf einem Gitter-W�
 - **Grundkonzept:** Audio-reaktive Visuals mit custom TouchDesigner Komponenten für präzise und flexible Parametersteuerung
 
 ## Umsetzung
+
+### Gitter-Struktur-Basis (Grid Lines Texture)
+
+**Daten-Konvertierungspipeline:**
+1. **Green TOP** → **SOP to CHOP** → **CHOP to TOP** (für Datenmanipulation)
+2. **TOP to CHOP** → **CHOP to SOP** (zurück zu Geometrie-Daten)
+
+**Grid-Parameter:**
+- Primitive Type: Polygon
+- Connectivity: Columns
+- Channel Scope: R, G, B (vollständig, nicht nur R)
+- **CHOP to TOP** Image Layout: **Fit to Square**
+- **TOP to CHOP** Setting: **Output as Single Channel** aktiviert
+
+**Liniendicke-Kontrolle:**
+- **Line Material** auf Geometry anwenden
+- **CHOP to SOP** Parameter:
+  - Channel Scope: R, G, B, **A** (Alpha)
+  - Attribute Scope: P0, P1, P2, **Width**
+  - Format: **32-bit Float RGBA**
+- **Reorder TOP:** Input 1 (Grid) + Input 2 (Noise/Ramp) → Alpha-Kanal
+- **Noise TOP:** Für organische Variation (Parameter: Period, Harmonic Gain, Exponent)
+- **Ramp TOP:** Für systematische Gradation (Extend Left: Mirror)
 
 ### Audio Setup
 1. Audio-Track in TouchDesigner importieren (z.B. von Epidemic Sound)
@@ -39,16 +70,30 @@ Erstellung eines audio-reaktiven Visuellen Effekts basierend auf einem Gitter-W�
 - **Verwendbar** auf jedem Parameter, der normalerweise mit `abs(time.seconds)` animiert wird
 - In diesem Projekt: Würfel-Parameter mit Audio-Reaktivität verbunden
 
+### Rendering & Visualisierung
+1. **Geometry Component** mit Line Material
+2. **Render TOP** + **Camera**
+3. **RGB Key** für schwarzen Hintergrund
+4. **Level TOP** optional (für Opacity-Anpassung)
+
+### Animation
+- **Noise Translation:** `abs(time.seconds)` auf Translate Z (kontinuierliche Bewegung)
+- **Grid Rotation:** Optional auf Rotate Y für sphärische Variationen
+
 ## Abänderungen
 
-- **Sphere durch Würfel ersetzt** als Geometrie-Element
-- **Nur Audio Reactive Rotation implementiert** (bis Minute 5:30 des Tutorials)
-- Würfel-Parameter statt Sphere-Parameter für Translate Z und andere Transformationen
+- **Grid SOP statt Sphere** als primäre Geometrie-Basis
+- **Nur Audio Reactive Rotation implementiert** (bis Minute 5:30 des Audio Reactive Visuals Tutorials)
+- Liniendicken-Kontrolle durch Noise- und Ramp-Texturen
+- Würfel-Parameter statt Sphere-Parameter für Translate Z
 - Fokus auf kontinuierliche, zeitbasierte Animationen durch Audio
+- Resolutions-Synchronisierung zwischen Chops und Tops
 
 ## Erfolge
 
+- Effektive Daten-Konvertierung zwischen SOP/TOP/CHOP-Formaten
+- Parametrische Kontrolle über Liniendicke und Linien-Muster
 - Audio-reaktive Geometrie mit automatisiertem Timeline-Setup
-- Einfache Geschwindigkeit und Bewegung durch Audio-Pegel steuerbar
-- Custom Komponenten reduzieren Konfigurationsaufwand
 - Flexible Multiplikatoren ermöglichen schnelle Anpassung an verschiedene Audiotracks
+- Basis-Framework für komplexere Grid-Animationen
+- Custom Komponenten reduzieren Konfigurationsaufwand

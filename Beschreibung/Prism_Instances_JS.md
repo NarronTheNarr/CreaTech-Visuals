@@ -11,7 +11,14 @@ Erstellung eines prismatischen, audio-reaktiven Visuellen Effekts durch **Instan
 **Links & Downloads:**
 - **von:** nsohfi (Noah Shipman)
 - **Zeigt:** Instancing, Audio-Analysis, Feedback-Loops, Prismatic Compositing
-- **Grundkonzept:** Audio-reaktive Prismen-Visuals mit Color Trails und dynamischen 3D-Überlagerungen
+- **Zielgruppe:** Fortgeschrittene TouchDesigner-Nutzer (Grundlagen erforderlich)
+
+**Grundkonzept:**
+- Detaillierter Prozess hinter audio-reaktiven Prismen-Visuals
+- Verwendung von **Instancing** für Performance-Optimierung statt Node-Duplikation
+- Audio-Analysis zur Frequenzband-Separation (Low, Mid, High)
+- Feedback-Loops und Color Trails für kontinuierliche visuelle Rückkopplung
+- Prismatische Compositing-Effekte durch mehrfache Überlagerungen
 
 ## Umsetzung
 

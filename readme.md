@@ -126,27 +126,38 @@ AUDIO EINGABE                          VERARBEITUNG              AUSGABE
 
 ### Visual 2: Würfel_Gitter_AT
 
-**Konzept:** Audio-reaktive Grid-Effekte auf Würfel-Struktur mit automatisierten Audio-Reaktiv-Komponenten
+**Konzept:** Audio-reaktive Grid-Effekte auf Würfel-Struktur durch parametrische Gitter und automatisierte Audio-Reaktiv-Komponenten
 
 **⚠️ Voraussetzung:** Custom Audio-Reactive Komponenten müssen vom [Acrylicode Patreon](https://www.patreon.com/acrylicode) heruntergeladen werden:
 - Setup Audio Reactive Song Component
 - Audio Reactive Rotation Component
 
+**Tutorial-Reihe:**
+
+1. **Basis:** [Grid Lines Texture | TouchDesigner Tutorial](https://www.youtube.com/watch?v=U1HsqYYmn78)
+   - Parametrische Gitter-Strukturen durch SOP/CHOP/TOP Konvertierung
+   - Liniendicken-Kontrolle via Noise & Ramp Texturen
+   
+2. **Haupttutorial:** [Create audio reactive visuals on TouchDesigner](https://www.youtube.com/watch?v=dPXkWLHYCQk)
+   - Custom Audio-Reactive Komponenten Integration
+   - Timeline-Automatisierung und Parametersteuerung
+
 **Umsetzung:**
-- **Audio Setup:** Audio-Track in TouchDesigner importieren mit automatischer Timeline-Anpassung via Setup Audio Reactive Song Component
+- **Gitter-Struktur:** Grid SOP mit SOP→CHOP→TOP→CHOP→SOP Konvertierungspipeline
+- **Liniendicke-Kontrolle:** Line Material mit Alpha-Channel (Noise/Ramp basiert)
+- **Audio Setup:** Audio-Track mit automatischer Timeline-Anpassung via Setup Audio Reactive Song Component
 - **Custom Komponenten:**
   - Setup Audio Reactive Song (automatisiert Timeline-Länge und Play Mode)
   - Audio Reactive Rotation (kontinuierlich wachsende Werte für Rotations- und Translations-Parameter)
-- **Effekte:** Gitter-basierte Würfel-Visualisierung mit Noise-Funktionen
+- **Effekte:** Parametrische Würfel-Visualisierung mit Noise- und Ramp-kontrollierten Liniendicken
 - **Parameter-Animation:** Multiplizierte LFO-Werte für kontinuierliche Bewegung (z.B. ×0.01, ×0.03)
 
-**Basis-Tutorial:** [Create audio reactive visuals on TouchDesigner](https://www.youtube.com/watch?v=dPXkWLHYCQk) von Acrylicode
-
 **Modifikationen:**
-- Sphere durch Würfel ersetzt als Geometrie-Element
+- **Grid SOP statt Sphere** als primäre Geometrie-Basis
 - Nur Audio Reactive Rotation implementiert (bis Minute 5:30)
-- Fokus auf kontinuierliche, zeitbasierte Animationen durch Audio-Pegel
-- Würfel-Parameter mit Audio-Reaktivität verbunden
+- Liniendicken-Kontrolle durch Noise- und Ramp-Texturen
+- Resolutions-Synchronisierung zwischen Chops und Tops
+- Fokus auf kontinuierliche, zeitbasierte Animationen durch Audio
 
 ### Visual 3: Prism_Instances_JS
 
