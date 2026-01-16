@@ -249,16 +249,6 @@ Danach erfolgte die **individuelle Umsetzung** der Tutorials in eigene TouchDesi
 - **TouchDesigner 2023** – Hauptentwicklungssoftware
 - **AI-Tools** – Unterstützung bei Dokumentation und Rechtschreibeprüfung
 
-### Lerneffekte (Zusammenfassung)
-
-**Aaron:**
-- Grundsätzliches Verständnis für TouchDesigner-Möglichkeiten
-- Wie Audio-Signale visuelle Effekte steuern
-- Wichtigkeit sorgfältiger Tutorial-Auswahl
-- Praktisches Wissen über Frequency-Band-Separation und Parameter-Steuerung
-
-**Jan:**
-- [Wird ergänzt]
 
 ---
 
