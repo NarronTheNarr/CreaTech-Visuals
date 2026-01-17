@@ -68,7 +68,7 @@ AUDIO EINGABE                          VERARBEITUNG              AUSGABE
 ```
 
 **Grafische Veranschaulichung der Systemarchitektur:**
-![System Architecture Diagram](/Demos/pictures/creaTech_system_architecture.jpg)
+![System Architecture Diagram](/creaTech_system_architecture.jpg)
 
 **Komponenten-Details:**
 
@@ -221,6 +221,17 @@ Nach dem Download in das Projekt-Verzeichnis kopieren oder im Netzwerk-Dialog la
 4. **Test:** Musik abspielen und Visuals sollten reagieren
 
 ---
+
+## 📹 Video-Ressourcen
+
+### Demo Videos
+Schaue dir die erstellten Visuals in Aktion an:
+→ **[Demo Videos Playlist](https://youtube.com/playlist?list=PL1AuDKbdA11S-ClVK1wWQfbwvTORzaZr3&si=Oept_Ms1Qnhzgilk)**
+
+### Erklär Videos
+Detaillierte Erklärungen zur Technik und Umsetzung:
+→ **[Erklär Videos Playlist](https://www.youtube.com/playlist?list=PL1AuDKbdA11TB7vLqEOIXLVz_h47NN9El)**
+
 ---
 
 ## 📝 Entwicklungsprozess & Reflexion
@@ -352,13 +363,31 @@ CreaTech-Visuals/
 ├── REFLECTION.md                       (Reflection Report)
 ├── Beschreibung/
 │   ├── 6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT.md
+│   ├── Blocks_JS.md
+│   ├── Prism_Instances_JS.md
 │   └── Würfel_Gitter_AT.md
 └── TouchDesigner/
-    ├── attachements/
     └── visuals/
         ├── 6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT.toe
+        ├── Blocks_JS.toe
+        ├── Blocks_JS.2.toe
+        ├── Prism_Instances_JS.toe
         ├── Würfel_Gitter_AT.toe
-        └── Backup/ & ungenutzt/
+        ├── Würfel_Gitter_AT.1.toe
+        ├── Backup/
+        │   ├── 6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT.1.toe
+        │   ├── 6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT.2.toe
+        │   ├── 6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT.4.toe
+        │   ├── 6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT.4.1.toe
+        │   ├── Prism_Instances_JS.toe
+        │   ├── Prism_Instances_JS.1.toe
+        │   ├── Prism_Instances_JS.2.toe
+        │   └── Prism_Instances_JS.3.toe
+        ├── Combined/
+        │   └── cookingnightmare.toe
+        └── ungenutzt/
+            ├── Soundwaves_AT.toe
+            └── Würfel_mit_spikes_AT.toe
 ```
 
 ---
