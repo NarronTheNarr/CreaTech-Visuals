@@ -15,8 +15,8 @@ Wir haben audiovisuelle Livevisuals mittels **TouchDesigner** kreiert. Dabei hab
 
 1. **[6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT](./Beschreibung/6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT.md)** – Projection Mapping mit Audio-Reaktivität
 2. **[Würfel_Gitter_AT](./Beschreibung/Würfel_Gitter_AT.md)** – Audio-reaktive Gitter-Würfel Effekte
-3. **[Prism_Instances_JS](TouchDesigner/visuals/Prism_Instances_JS.toe)** – Prismatische Würfel-Instancing mit Audio-Reaktivität
-4. **[Visual 4 - Coming Soon]** – Zusätzliches Audio-reaktives Projekt (in Bearbeitung) 
+3. **[Prism_Instances_JS](Beschreibung/Prism_Instances_JS.md)** – Prismatische Würfel-Instancing mit Audio-Reaktivität
+4. **[Blocks_JS](Beschreibung/Blocks_JS.md)** – Cubes auf einer Ebene verteilt und Manipulation durch Audio
 
 ---
 
@@ -293,7 +293,9 @@ Danach erfolgte die **individuelle Umsetzung** der Tutorials in eigene TouchDesi
 
 ### Jan Schmidt
 
-[Wird ergänzt]
+- Erste Berühungspunkte mit TouchDesigner und dessen Audioverarbeitung
+- Was cooking in diesem Kontext ist und wie zwischen verschiedenen Effekten hin und her geschalten werden kann
+- Wie Pixelclouds funktionieren und wie GPU-hungrig diese sind
 
 ---
 

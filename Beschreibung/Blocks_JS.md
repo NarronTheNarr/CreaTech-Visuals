@@ -22,109 +22,84 @@ Erstellung eines audio-reaktiven Visuellen Effekts durch **Instancing** von Wür
 ### Audio Setup
 1. Audio-Datei in Projekt importieren (Drag & Drop)
 2. **Audio Device Out CHOP** für Audioausgabe
-3. **Math CHOP** mit "Combine Channels" → "Average" für Mono-Konvertierung
-4. **Audio Analysis** mit Mid & High Kanälen aktiviert
-   - Threshold, Gain und Smoothing zur Musik anpassen für glatte, aber dynamische Bewegung
-5. **Select CHOP** mit Kanälen: `low`, `mid`, `high`
-6. **CHOP to TOP** (Format: RGB, Image Layout: Row per Channel)
-   - Resultat: Ein Pixel mit R, G, B = Low, Mid, High
+3. Custom **AudioAnalysis Component** erstellen:
+   - **Audio File In CHOP** als Quelle
+   - **Math CHOP** mit "Combine Channels" → "Average" für Mono-Konvertierung
+   - **Audio Analysis CHOP** mit allen Kanälen aktiviert (Low, Mid, High)
+   - Zusätzliche **Band EQ Filter CHOPs** für spezifische Frequenzbereiche:
+     - Kick: Low-Pass Filter (~60-120 Hz)
+     - Snare: Band-Pass Filter (~150-250 Hz)
+     - High-Hat: High-Pass Filter (~8-12 kHz)
+4. **Select CHOPs** für jeden benötigten Kanal
+5. **Null CHOPs** als Output-Referenzen benennen
+   - "audio_kick", "audio_snare", "audio_low", "audio_mid", "audio_high"
 
-### Farb-Trail-Netzwerk (Color Trail)
-1. **Fit TOP** – Einzelnes Pixel hochskalieren
-2. **Transform TOP** – Translate Y: `0.9`
-3. **Feedback TOP** mit integriertem Loop:
-   - **Transform TOP** – Translate Y: `0.09`
-   - **Composite TOP** (Mode: Over) – Feedback als Target, erste Transform als Input
-4. **Null** – Name: "color trail" (Basis für Instancing)
+### Block-Geometrie Setup
+1. **Box SOP** – Basis-Würfelgeometrie
+2. Mehrere **Copy SOPs** für verschiedene Würfel-Anordnungen:
+   - Grid-Anordnung: Rows/Columns mit Spacing
+   - Circular-Anordnung: Mit Transform SOP rotieren
+   - Random-Anordnung: Scatter SOP verwenden
+3. **Merge SOP** um verschiedene Geometrie-Sets zu kombinieren
 
-### Noise-Geometrie
-1. **Tube SOP** mit Twist-Effekten:
-   - Rows/Columns: 100, Orientation: Z-axis, Height: 10
-   - Twist 1: Strength 500
-   - Twist 2: Axis Z, Strength 22
-2. **SOP to CHOP** → **SOP to TOP** (RGB, Fit to Square)
-3. **Noise TOP** mit finalen Parametern:
-   - Period: 0.12, Harmonics: 0.46, Amplitude: 0.19, Offset: 0.057
-   - Transform Tab – Translate C: `abs(ime.docs)`
+### Instancing & Material Setup
+1. **Geometry COMP** – Instancing aktivieren
+2. **Constant Material MAT**:
+   - Color Map: Texture-Referenz (siehe nächster Schritt)
+   - Ambient Color: Audio-gesteuert (Mid-Channel)
+   - Specular: Audio-gesteuert (High-Channel)
 
-### Composite-Netzwerk
-1. Zwei **Composite TOPs** (Overlay & Glow):
-   - Color Trail (Input 1) + Noise (Input 2)
-2. **Cross TOP** – Wert: ~0.4
-3. **Null** – Name: "for instancing"
+### Rotation & Transformation
+1. **LFO CHOPs** für kontinuierliche Bewegung
+2. **Math CHOPs** um Audio-Signale zu multiplizieren:
+   - LFO × Audio-Kick für impulsive Rotation
+   - Amplitude-Scaling: ×360 für volle Drehungen
 
-### Instancing & 3D-Setup
-1. **Box SOP** – Size: 0.7, Scale: 0.001
-2. **Geometry COMP** – Instancing aktivieren
-3. **Default OP Parameter** → "for instancing" NULL
-4. **Translate XYZ** → R, G, B (Farben steuern Positionen)
-5. **Constant Material** – Opacity: ~0.1, Blending & Transparency aktivieren
-6. **Render TOP** + **Camera**
-7. **RGB Key** vor Output
+### 3D-Kamera & Rendering
+1. **Camera COMP** Setup
+2. **Light COMPs** für dynamische Beleuchtung
+3. **Render TOP**
 
-### Resolution Management
-- **Constant CHOP** "global res" mit W (1080) und H (1080)
-- Drag & Drop auf Render-Resolution als CHOP Reference
-- Render Pixel Format: 16-bit Float RGBA
+### MIDI-Integration (Optional)
+1. **MIDI In CHOP** für Controller-Input
+2. **MIDI In Map CHOP** zum Mapping von CC-Werten
+3. **Select CHOPs** für spezifische MIDI-Kanäle
+4. **Parameter-Switches** mit MIDI-Triggern:
+   - Button 1: Geometrie-Type wechseln
+   - Button 2: Material-Mode umschalten
+   - Button 3: Rotation-Speed ändern
+   - Fader 1-4: Opacity, Scale, Color, Brightness
+5. **Logic CHOP** für Toggle-Funktionen
 
-### Multi-Kamera-Blending
-1. Zwei **Cameras**:
-   - Cam 1: Orthografisch, direkte Ansicht
-   - Cam 2: Isometrisch, angewinkelt
-2. **Cam Blend Component**:
-   - **LFO**: Frequenz 0.025, Offset 0.5, Amplitude 0.5
-   - Weight 1: LFO-Channel 1
-   - Weight 2: `1 - [Weight 1]`
+### Feedback & Post-Processing
+1. **Feedback TOP** für visuelle Persistenz
+   - **Transform TOP** intern: Scale 1.01 (Zoom-Out-Effekt)
+2. **Composite TOP** (Add-Mode):
+   - Current Frame + Feedback
+3. **Blur TOP**
+4. **Bloom TOP**
 
-### Geometrie-Rotation
-- **LFO**: Frequenz 0.11, Offset 69.8, Amplitude 20, Type Gaussian, Bias 0.5
+### Color Grading
+1. **Lookup TOP** mit **Ramp**
+2. **Level TOP**
+3. **HSV Adjust TOP**:
+   - Hue Shift: Audio-Low × 360 (kontinuierliche Farbrotation)
 
-### Prismatisches Compositing
-1. **Level TOP** – Opacity: ~0.13
-2. Mehrfache **Over + Transform** Paare mit unterschiedlichen Transformationen:
-   - Beispiel: Translate X: 0.5, Y: 0.2, Scale: -1, -1
-   - Erzeugt Würfel-Duplikate an verschiedenen Positionen
-
-### Feedback & Blur-Effekte
-1. **Feedback TOP** + **Level TOP** (0.75) + **Composite TOP** (Add-Mode)
-2. **Luma Blur** mit **Ramp** (Circular, Filter Size: 60)
-3. **Bloom TOP**
-
-### Light Leaks (Optional)
-1. Stock-Video importieren
-2. **Fit TOP** mit Global-Resolution-Referenzen
-3. **Composite TOP** (Add-Mode)
-4. **Multiply Composite** mit **Ramp** zur Center-Maskierung (Center: Schwarz, Enden: Weiß)
-5. **Level TOP** – Opacity gesteuert durch Audio-High:
-   - Select (High) → Filter → Math (×1.1) → Null "light leak control"
-   - Als CHOP Reference auf Level Opacity
-
-### Dynamische Audio-Steuerung
-Für Parameter-Switches basierend auf Audio (z.B. Transform Y zwischen -0.1 und 0.9):
-1. **Select CHOP** (Low/Mid/High-Channel)
-2. **Math CHOP** (×10)
-3. **Trigger** (Threshold: ~1.4, Attack/Sustain: 0)
-4. **Logic CHOP** (Channel Preop: Toggle)
-5. **Switch CHOP** mit zwei Constant-Werten
-6. Switch ← Logic Null (als CHOP Reference)
-7. **Wiederholen** für Mid und High auf anderen Parametern
-
-### Finale Optimierungen
-1. **Noise Level Top** vor "for instancing" reduzieren (konzentriert Würfel-Darstellung)
-2. **Lookup TOP** nach RGB Key mit **Ramp** für Farbanpassung
-3. **RGB Delay TOP** optional
+### Performance-Optimierung
+1. **Resolution CHOPs** als globale Variablen
+2. **Instancing** statt Duplikation verwenden
+3. **Null OPs** für häufig referenzierte Nodes
+4. Cook-Type auf "Auto" nur bei finalen Output-Nodes
 
 ## Abänderungen
 
-- Unterschiedliche Blend-Modes für Overlay/Glow Composites testen
-- Cross-Wert variieren für stärkere/schwächere Noise-Integration
-- Prismatische Transformationen randomisieren
-- Post-Processing in After Effects: Color/Contrast-Editing, erweiterte Blur, Grain gegen Banding
+- Im Tutorial alles mit MIDI gesteuert, diese habe ich zu Audioreaktiv geändert
 
 ## Erfolge
 
-- Visuell spektakulär mit prismatischen Effekten und Audio-Reaktivität
-- **Instancing** ermöglicht hohe Performance statt Node-Duplikation
-- Flexible Parameter erlauben einfache Anpassung an verschiedene Audio-Quellen
-- Vollständig echtzeitfähig für Live-Performances
-- Großer Experimentierraum für kreative Variationen und Anpassungen
+- Hochperformantes Instancing ermöglicht große Mengen an Würfeln in Echtzeit
+- MIDI-Integration erlaubt intuitive Live-Kontrolle während Performances
+- Flexible Audio-Analyse-Pipeline für verschiedene Musik-Genres
+- Modularer Aufbau ermöglicht einfaches Austauschen von Komponenten
+- Vollständig echtzeitfähig für Live-VJ-Sets und Performances
+
