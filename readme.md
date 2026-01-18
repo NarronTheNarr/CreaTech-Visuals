@@ -215,7 +215,7 @@ AUDIO EINGABE                          VERARBEITUNG              AUSGABE
 
 ---
 
-## � Installation & Setup
+## Installation & Setup
 
 ### Dateien öffnen
 
@@ -292,7 +292,7 @@ Danach erfolgte die **individuelle Umsetzung** der Tutorials in eigene TouchDesi
 **→ [Ausführlicher Reflection Report mit allen Details](./REFLECTION.md)**
 
 ---
-## �🔧 Aufgabenverteilung
+## 🔧 Aufgabenverteilung
 
 | Aufgabe | Verantwortlich |
 |---------|---|
@@ -398,19 +398,19 @@ CreaTech-Visuals/
     └── visuals/
         ├── 6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT.toe
         ├── Blocks_JS.toe
-        ├── Blocks_JS.2.toe
         ├── Prism_Instances_JS.toe
         ├── Würfel_Gitter_AT.toe
-        ├── Würfel_Gitter_AT.1.toe
         ├── Backup/
         │   ├── 6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT.1.toe
         │   ├── 6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT.2.toe
         │   ├── 6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT.4.toe
         │   ├── 6_Würfel_mit_projizierten_Visuals_auf_Seiten_AT.4.1.toe
-        │   ├── Prism_Instances_JS.toe
+        │   ├── Blocks_JS.2.toe
         │   ├── Prism_Instances_JS.1.toe
         │   ├── Prism_Instances_JS.2.toe
-        │   └── Prism_Instances_JS.3.toe
+        │   ├── Prism_Instances_JS.3.toe
+        │   ├── Prism_Instances_JS.toe
+        │   └── Würfel_Gitter_AT.1.toe
         ├── Combined/
         │   └── cookingnightmare.toe
         └── ungenutzt/
