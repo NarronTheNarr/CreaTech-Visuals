@@ -187,6 +187,32 @@ AUDIO EINGABE                          VERARBEITUNG              AUSGABE
 - Dual-Kamera-Blending für dynamische Perspektivwechsel
 - Audio-reaktive Light Leaks für erhöhte Dynamik
 
+### Visual 4: Blocks_JS
+
+**Konzept:** Audio-reaktive Würfel-Visualisierung durch hochperformantes Instancing mit verschiedenen geometrischen Anordnungen (Grid, Circular, Random)
+
+**Umsetzung:**
+- **Audio Setup:** Custom AudioAnalysis Component mit Frequenzband-Separation (Low, Mid, High, Kick, Snare, High-Hat)
+- **Block-Geometrie:** 
+  - Box SOP als Basis-Würfelgeometrie
+  - Multiple Copy SOPs für verschiedene Anordnungen (Grid-Rows/Columns, Circular mit Transform SOP, Random via Scatter SOP)
+  - Merge SOP zur Kombination verschiedener Geometrie-Sets
+- **Instancing & Material:** Geometry COMP mit aktiviertem Instancing und Constant Material (Audio-gesteuerte Ambient/Specular-Parameter)
+- **Rotation & Transformation:** LFO CHOPs kombiniert mit Math CHOPs für audio-gesteuerte Rotation (LFO × Audio-Kick × 360°)
+- **Effekte:**
+  - Feedback TOP mit Transform (Scale 1.01 für Zoom-Out-Effekt)
+  - Composite TOP (Add-Mode), Blur & Bloom für visuelle Persistenz
+  - Color Grading via Lookup TOP, Level TOP, HSV Adjust (Hue Shift durch Audio-Low × 360°)
+- **3D-Setup:** Camera COMP mit dynamischen Light COMPs und Render TOP
+
+**Basis-Tutorial:** [How I Create Audio-Reactive Art | Touch Designer Crash Course](https://www.youtube.com/watch?v=12J2XH2UxDc&t) von pwnisher
+
+**Modifikationen:**
+- **MIDI zu Audio:** Alle MIDI-gesteuerten Parameter auf Audio-Reaktivität umgestellt
+- Hochperformantes Instancing statt Node-Duplikation
+- Flexible Audio-Analyse-Pipeline für verschiedene Musik-Genres
+- Modularer Aufbau für einfaches Austauschen von Komponenten
+
 ---
 
 ## � Installation & Setup
